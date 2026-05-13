@@ -1111,16 +1111,15 @@
             <div>This is a watch-only wallet.</div>
           </div>
 
-          <!-- PROPOSED: single summary row, no toggle -->
-          <div class="summary-row">
-            <div class="summary-item">
-              <span class="label">Available</span>
-              <span class="val">$262.23</span>
+          <!-- PROPOSED: keep the existing two-pill toggle (no change) -->
+          <div class="split-pills">
+            <div class="split-pill active">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>
+              $262.23 <span class="count-badge">3</span>
             </div>
-            <div class="summary-divider"></div>
-            <div class="summary-item">
-              <span class="label">In Open Orders</span>
-              <span class="val">$225.93</span>
+            <div class="split-pill">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              $225.93 <span class="count-badge">1</span>
             </div>
           </div>
 
@@ -1261,33 +1260,28 @@
     <div class="annotations-grid">
       <div class="annotation">
         <div class="num">1</div>
-        <div class="head">Replace pill toggle with summary row</div>
-        <div class="body">The split <strong>$262 / $225</strong> pills hide vault tokens behind an unlabeled icon. The replacement reads as an info breakdown, not navigation — both numbers visible, no taps required.</div>
+        <div class="head">Unify UNOS into one position</div>
+        <div class="body">Token row shows <strong>total 240,142 UNOS</strong> with a one-line breakdown: 104,681 available · 135,461 locked. No more "where did my tokens go" — every UNOS is accounted for in the same place George is already looking.</div>
       </div>
       <div class="annotation">
         <div class="num">2</div>
-        <div class="head">Unify UNOS into one position</div>
-        <div class="body">Token row shows <strong>total 240,142 UNOS</strong> with a one-line breakdown: 104,681 available · 135,461 locked. No more "where did my tokens go" — every UNOS is accounted for, inline.</div>
+        <div class="head">Flag tokens with active orders</div>
+        <div class="body">A small <span class="order-chip" style="vertical-align:middle">1 order</span> chip on the token name makes it scannable at a glance which holdings have funds tied up off-wallet — without forcing the user into the second pill view to find out.</div>
       </div>
       <div class="annotation">
         <div class="num">3</div>
-        <div class="head">Flag tokens with active orders</div>
-        <div class="body">A small <span class="order-chip" style="vertical-align:middle">1 order</span> chip on the token name makes it scannable at a glance which holdings have funds tied up off-wallet.</div>
-      </div>
-      <div class="annotation">
-        <div class="num">4</div>
         <div class="head">Rename "Jupiter" → "Open Orders"</div>
         <div class="body">A section titled <strong>"Jupiter"</strong> inside the Jupiter app is recursive and meaningless to anyone who doesn't already know it refers to the protocol's order vault. Functional names beat brand names.</div>
       </div>
       <div class="annotation">
-        <div class="num">5</div>
+        <div class="num">4</div>
         <div class="head">Show order context, not just $</div>
         <div class="body">The order card surfaces what trad traders look for: <strong>side, pair, units, limit price vs. current, fill progress</strong>. Two taps deep on the current app, all of it absent.</div>
       </div>
       <div class="annotation">
-        <div class="num">6</div>
-        <div class="head">Total stays anchored at the top</div>
-        <div class="body">$488.16 always reflects wallet + orders combined. The current app does this too, but the disconnect between total and the visible $262.23 token list is what confused George. Surfacing the locked portion fixes the math optically.</div>
+        <div class="num">5</div>
+        <div class="head">Reconcile the top-line total optically</div>
+        <div class="body">The disconnect between <strong>$488.16</strong> at the top and the visible <strong>$262.23</strong> token list is what confused George. The unified UNOS row makes the math add up in plain sight — wallet $262.23 + UNOS locked $225.93 + nothing hidden = $488.16.</div>
       </div>
     </div>
   </div>

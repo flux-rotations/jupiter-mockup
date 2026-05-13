@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jupiter Mobile · Unified Holdings Mockup</title>
+<style>
+  /* ============ Reset & Base ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e14;
+    --bg-elev: #11161e;
+    --bg-card: #141a23;
+    --bg-card-2: #1a212c;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.12);
+    --teal: #5BFFD0;
+    --teal-dim: rgba(91,255,208,0.15);
+    --teal-soft: rgba(91,255,208,0.08);
+    --red: #ff5e5e;
+    --green: #5BFFD0;
+    --text: #ffffff;
+    --text-2: #8a93a3;
+    --text-3: #5a6273;
+    --warn-orange: #ff9532;
+    --highlight: #ffd95b;
+  }
+
+  html, body {
+    background: #06080c;
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  body {
+    padding: 48px 24px 80px;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(91,255,208,0.04), transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(91,255,208,0.03), transparent 60%),
+      #06080c;
+  }
+
+  /* ============ Page Layout ============ */
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .page-title .accent { color: var(--teal); }
+
+  .page-sub {
+    color: var(--text-2);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ============ Toggle ============ */
+  .toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 28px 0 36px;
+  }
+
+  .toggle {
+    display: inline-flex;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .toggle button {
+    background: transparent;
+    border: none;
+    color: var(--text-2);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .toggle button.active {
+    background: var(--teal);
+    color: #062018;
+    font-weight: 600;
+  }
+
+  /* ============ Phone Frame ============ */
+  .phones {
+    display: flex;
+    gap: 64px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .phone-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .phone-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  .phone-label.proposed {
+    color: var(--teal);
+  }
+
+  .phone {
+    width: 380px;
+    height: 800px;
+    background: var(--bg);
+    border-radius: 48px;
+    border: 12px solid #1a1f28;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 50px 100px -20px rgba(0,0,0,0.7),
+      0 30px 60px -30px rgba(91,255,208,0.1);
+  }
+
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 28px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 100;
+  }
+
+  /* ============ Phone Inner Scroll ============ */
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(91,255,208,0.08), transparent 70%),
+      linear-gradient(180deg, #0d1218 0%, #07090c 50%);
+    position: relative;
+  }
+
+  .screen::-webkit-scrollbar { width: 0; }
+
+  /* ============ Status Bar ============ */
+  .status-bar {
+    height: 54px;
+    padding: 18px 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+  }
+
+  .status-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* ============ Header (Wallet/Spend tabs) ============ */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eye-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    color: #062018;
+  }
+
+  .tab-pill {
+    display: inline-flex;
+    background: rgba(20,26,35,0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 999px;
+    padding: 4px;
+  }
+
+  .tab-pill button {
+    background: transparent;
+    border: none;
+    color: var(--text-2);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-family: inherit;
+  }
+
+  .tab-pill button.active {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+  }
+
+  .icon-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(20,26,35,0.7);
+    backdrop-filter: blur(20px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text);
+  }
+
+  .icon-row {
+    display: flex; gap: 8px;
+  }
+
+  /* ============ Hero Backdrop ============ */
+  .hero {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -8px;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center 30%, rgba(91,255,208,0.08), transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(40,80,90,0.3), transparent 60%);
+    z-index: 0;
+  }
+
+  /* simple silhouette suggesting the existing hero astronaut */
+  .hero-figure {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .username {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 4px;
+    opacity: 0.95;
+  }
+
+  .balance {
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  /* ============ Watch-only banner ============ */
+  .watch-banner {
+    margin: 12px 20px 0;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+    position: relative;
+    z-index: 2;
+  }
+
+  .info-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ============ Section: Split pills (CURRENT) ============ */
+  .split-pills {
+    margin: 16px 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .split-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .split-pill.active {
+    border-color: var(--teal);
+    background: rgba(91,255,208,0.04);
+  }
+
+  .split-pill .count-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.08);
+    color: var(--text-2);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
+
+  .split-pill.active .count-badge {
+    background: var(--teal-dim);
+    color: var(--teal);
+  }
+
+  /* ============ Summary Row (PROPOSED) ============ */
+  .summary-row {
+    margin: 16px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .summary-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .summary-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .summary-item .val {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .summary-divider {
+    width: 1px;
+    height: 28px;
+    background: var(--border-strong);
+  }
+
+  /* ============ PnL Row ============ */
+  .pnl-row {
+    margin: 12px 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .pnl-icon {
+    color: var(--teal);
+  }
+
+  .pnl-row .label { font-weight: 600; }
+  .pnl-row .sep { color: var(--text-3); }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .chev-right { margin-left: auto; color: var(--text-3); }
+
+  /* ============ Token List ============ */
+  .token-list {
+    margin: 16px 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .token-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .token-row {
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .token-icon {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .token-icon.sol {
+    background: linear-gradient(135deg, #9945FF 0%, #14F195 100%);
+    color: white;
+  }
+  .token-icon.unos {
+    background: #2a2f3a;
+    color: var(--text-2);
+    position: relative;
+  }
+  .token-icon.unos::after {
+    content: "!";
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 14px; height: 14px;
+    background: var(--warn-orange);
+    border-radius: 50%;
+    font-size: 10px;
+    color: #1a1100;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--bg-card);
+  }
+  .token-icon.skr {
+    background: #fff;
+    color: #000;
+  }
+
+  .token-info { flex: 1; min-width: 0; }
+  .token-name {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .token-meta {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .token-meta .neg-pct { color: var(--red); }
+  .token-meta .pos-pct { color: var(--green); }
+
+  .token-value-block {
+    text-align: right;
+  }
+  .token-value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .token-units {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 2px;
+  }
+
+  /* sub-row showing breakdown — proposed only */
+  .token-breakdown {
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+
+  .breakdown-row {
+    padding: 10px 14px 10px 64px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .breakdown-row + .breakdown-row {
+    border-top: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .breakdown-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--text-3);
+  }
+
+  .breakdown-dot.locked { background: var(--highlight); }
+
+  .breakdown-label { flex: 1; }
+  .breakdown-value {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .breakdown-row.locked {
+    color: var(--text);
+  }
+
+  .breakdown-row.locked .breakdown-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .order-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--teal-soft);
+    color: var(--teal);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ Section Header ============ */
+  .section-header {
+    padding: 0 20px;
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-header .count {
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    padding: 1px 7px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ============ Jupiter section (current) ============ */
+  .jupiter-section {
+    margin: 16px 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .jupiter-header {
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .jup-logo {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD93D 0%, #95E5FF 50%, #FF6B9D 100%);
+  }
+
+  .jupiter-header .name {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .jupiter-header .ext-icon {
+    font-size: 11px;
+    color: var(--text-2);
+    border: 1px solid var(--text-3);
+    width: 14px; height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+  }
+
+  .jupiter-header .val { font-size: 15px; font-weight: 600; }
+  .jupiter-header .chev { color: var(--text-2); margin-left: 8px; }
+
+  .limit-order-section {
+    border-top: 1px solid var(--border);
+    padding: 16px 14px;
+  }
+
+  .limit-order-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+
+  .order-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+  }
+
+  .order-token-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-3);
+    background: linear-gradient(135deg, #9945FF, #14F195);
+    flex-shrink: 0;
+  }
+
+  .order-pair {
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .order-pair-arrow { color: var(--text-2); margin: 0 4px; }
+
+  .order-value-col {
+    text-align: right;
+  }
+  .order-value { font-size: 14px; font-weight: 600; }
+  .manage-btn {
+    margin-top: 6px;
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(91,255,208,0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  /* ============ Open Orders Card (PROPOSED) ============ */
+  .open-orders-card {
+    margin: 0 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+
+  .order-card-row {
+    padding: 14px;
+  }
+
+  .order-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .order-side-badge {
+    background: rgba(255,217,91,0.12);
+    color: var(--highlight);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .order-side-badge.dca {
+    background: rgba(91,255,208,0.12);
+    color: var(--teal);
+  }
+  .order-side-badge.va {
+    background: rgba(178,140,255,0.15);
+    color: #b28cff;
+  }
+  .order-side-badge.trigger-tp {
+    background: rgba(91,255,140,0.12);
+    color: #5bff8c;
+  }
+  .order-side-badge.trigger-sl {
+    background: rgba(255,94,94,0.12);
+    color: var(--red);
+  }
+  .order-side-badge.perps-long {
+    background: rgba(91,255,140,0.15);
+    color: #5bff8c;
+  }
+  .order-side-badge.perps-short {
+    background: rgba(255,94,94,0.15);
+    color: var(--red);
+  }
+  .order-side-badge.stake {
+    background: rgba(255,165,250,0.13);
+    color: #ff9bf0;
+  }
+
+  /* token icons for the meme/jupiter set */
+  .token-icon.wen {
+    background: linear-gradient(135deg, #FFD93D 0%, #FF8E3C 100%);
+    color: #2a1500;
+  }
+  .token-icon.jup {
+    background: linear-gradient(135deg, #FFD93D 0%, #95E5FF 45%, #FF6B9D 100%);
+    color: rgba(0,0,0,0.7);
+    font-weight: 800;
+  }
+  .token-icon.bonk {
+    background: linear-gradient(135deg, #FF6B0F 0%, #FFB300 100%);
+    color: #2a1500;
+  }
+
+  /* staked breakdown variant */
+  .breakdown-dot.staked { background: #ff9bf0; }
+
+  /* perps + staking specific bits */
+  .pnl-positive {
+    color: #5bff8c;
+    font-weight: 600;
+  }
+  .pnl-negative {
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .leverage-pill {
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* progress fills for new types */
+
+  .order-type-tag {
+    font-size: 10px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  .open-orders-card + .open-orders-card {
+    margin-top: 10px;
+  }
+
+  .progress-fill.dca { background: var(--teal); }
+  .progress-fill.va { background: #b28cff; }
+  .progress-fill.tp { background: #5bff8c; }
+
+  /* trigger condition strip */
+  .trigger-strip {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  .trigger-strip .left {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--text-2);
+  }
+  .trigger-strip .right { font-weight: 600; }
+  .distance-pill {
+    background: rgba(255,255,255,0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    color: var(--text-2);
+  }
+  .distance-pill.close { color: var(--warn-orange); background: rgba(255,149,50,0.1); }
+
+  .order-pair-display {
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .order-pair-display .arrow {
+    color: var(--text-3);
+    margin: 0 4px;
+  }
+
+  .order-time {
+    font-size: 11px;
+    color: var(--text-3);
+  }
+
+  .order-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  .detail-cell .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
+    margin-bottom: 2px;
+  }
+
+  .detail-cell .value {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .progress-bar-wrap {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--teal);
+    border-radius: 999px;
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  /* ============ Tab bar ============ */
+  .tab-bar {
+    position: sticky;
+    bottom: 0;
+    margin-top: 24px;
+    padding: 16px 20px 24px;
+    background: linear-gradient(180deg, transparent 0%, rgba(7,9,12,0.95) 30%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    z-index: 3;
+  }
+
+  .tab-bar-inner {
+    flex: 1;
+    background: rgba(20,26,35,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px;
+  }
+
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: var(--text-2);
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .tab-item.active {
+    background: var(--teal-dim);
+    color: var(--teal);
+  }
+
+  .tab-search {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(20,26,35,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ============ Annotations ============ */
+  .annotations {
+    max-width: 880px;
+    margin: 56px auto 0;
+  }
+
+  .annotations-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .annotations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .annotation {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+  }
+
+  .annotation .num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #062018;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .annotation .head {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .annotation .body {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .annotation .body strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* visibility helpers */
+  .current-only, .proposed-only { display: none; }
+  body.view-current .current-only { display: block; }
+  body.view-current .current-only.flex { display: flex; }
+  body.view-current .current-only.grid { display: grid; }
+  body.view-proposed .proposed-only { display: block; }
+  body.view-proposed .proposed-only.flex { display: flex; }
+  body.view-proposed .proposed-only.grid { display: grid; }
+
+  /* svg fill helpers */
+  svg { display: block; }
+  .ic { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ic-sm { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ============ Interactivity: collapsible + linked rows ============ */
+  .token-icon.usdc {
+    background: #2775ca;
+    color: white;
+  }
+
+  /* Token-row no longer the click target — only the expand button is */
+  .token-card[data-collapsible] .token-row { cursor: default; }
+  .token-card[data-collapsible] .token-row:hover { background: transparent; }
+
+  /* The isolated expand button (used on token cards AND section headers) */
+  .expand-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-2);
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+    padding: 0;
+    font-family: inherit;
+  }
+  .expand-btn:hover {
+    background: rgba(91,255,208,0.08);
+    color: var(--teal);
+    border-color: rgba(91,255,208,0.3);
+  }
+  .expand-btn:active {
+    transform: scale(0.95);
+  }
+  .expand-btn svg {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s ease;
+  }
+  .token-card.collapsed .expand-btn svg,
+  .section-header.collapsed .expand-btn svg {
+    transform: rotate(-90deg);
+  }
+  .section-header .expand-btn {
+    margin-left: auto;
+  }
+
+  .token-card.collapsed .token-breakdown { display: none; }
+
+  /* ============ Cleaner token-info layout ============ */
+  .token-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .token-headline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin-bottom: 4px;
+  }
+  .token-name {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .token-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .token-meta .meta-sep { color: var(--text-3); }
+  .token-value-block { flex-shrink: 0; }
+
+  /* ============ Section-level collapsibility ============ */
+  .section-header.collapsible {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    margin-bottom: 12px;
+    /* Note: header itself is NOT clickable — only the button inside */
+  }
+  .section-body.collapsed { display: none; }
+
+  /* ============ Restructured breakdown rows (2-line) ============ */
+  .breakdown-row {
+    padding: 11px 14px 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    transition: background-color 0.15s ease;
+  }
+  .breakdown-row:first-child { border-top: none; }
+
+  .bd-icon {
+    width: 18px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+  }
+  .breakdown-row.locked .bd-icon { color: var(--highlight); }
+  .breakdown-row.staked .bd-icon { color: #ff9bf0; }
+  .breakdown-row.dca-res .bd-icon { color: var(--teal); }
+  .breakdown-row.va-res .bd-icon { color: #b28cff; }
+  .breakdown-row.perps-res .bd-icon { color: #5bff8c; }
+
+  .bd-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .bd-label {
+    font-size: 13px;
+    color: var(--text-2);
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .breakdown-row.locked .bd-label,
+  .breakdown-row.staked .bd-label,
+  .breakdown-row.dca-res .bd-label,
+  .breakdown-row.va-res .bd-label,
+  .breakdown-row.perps-res .bd-label {
+    color: var(--text);
+  }
+  .bd-detail {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+  .bd-detail .bd-units {
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .bd-arrow {
+    color: var(--text-3);
+    font-size: 20px;
+    font-weight: 400;
+    flex-shrink: 0;
+    transition: transform 0.15s ease, color 0.15s ease;
+    line-height: 1;
+  }
+
+  .breakdown-row.linked {
+    cursor: pointer;
+  }
+  .breakdown-row.linked:hover {
+    background: rgba(91,255,208,0.04);
+  }
+  .breakdown-row.linked:hover .bd-arrow {
+    color: var(--teal);
+    transform: translateX(2px);
+  }
+
+  .order-chip.linked {
+    cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .order-chip.linked:hover {
+    filter: brightness(1.25);
+    transform: translateY(-1px);
+  }
+
+  /* pulse-highlight applied when scrolled-to */
+  @keyframes pulse-fade {
+    0%   { box-shadow: 0 0 0 0 rgba(91,255,208,0.55); border-color: var(--teal); }
+    40%  { box-shadow: 0 0 0 14px rgba(91,255,208,0); }
+    100% { box-shadow: 0 0 0 0 rgba(91,255,208,0); border-color: var(--border); }
+  }
+  .open-orders-card.pulse-highlight {
+    animation: pulse-fade 1.6s ease-out 1;
+  }
+
+  /* tiny "how to use" hint at top of proposed phone */
+  .interactive-hint {
+    margin: 12px 20px 0;
+    padding: 8px 12px;
+    background: rgba(91,255,208,0.05);
+    border: 1px dashed rgba(91,255,208,0.25);
+    border-radius: 10px;
+    font-size: 11px;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* desktop responsive */
+  @media (max-width: 900px) {
+    .phones { gap: 32px; }
+    .phone { width: 340px; height: 720px; }
+    .balance { font-size: 40px; }
+  }
+</style>
+</head>
+<body class="view-side-by-side">
+
+<div class="page">
+
+  <header class="page-header">
+    <div class="page-title">Jupiter Mobile · <span class="accent">Unified Holdings</span></div>
+    <div class="page-sub">A scalable UX pattern for showing all Jupiter product positions — Limit, DCA, VA, Trigger, Perps, and Staking — in one coherent portfolio view. Originally prompted by limit-order users seeing tokens "disappear" from their balance.</div>
+  </header>
+
+  <!-- PHONES -->
+  <div class="phones">
+
+    <!-- ===================== CURRENT ===================== -->
+    <div class="phone-column">
+      <div class="phone-label">Current</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar">
+            <span>7:52</span>
+            <div class="status-icons">
+              <span>•••</span>
+            </div>
+          </div>
+
+          <div class="top-bar">
+            <div class="eye-btn">
+              <svg class="ic" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="tab-pill">
+              <button class="active">Wallet</button>
+              <button>Spend</button>
+            </div>
+            <div class="icon-row">
+              <div class="icon-btn"><svg class="ic-sm" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div>
+              <div class="icon-btn"><svg class="ic-sm" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+            </div>
+          </div>
+
+          <div class="hero">
+            <div class="hero-content">
+              <div class="username">george</div>
+              <div class="balance">$1,809.94</div>
+            </div>
+          </div>
+
+          <div class="watch-banner">
+            <div class="info-dot">i</div>
+            <div>This is a watch-only wallet.</div>
+          </div>
+
+          <!-- CURRENT: split pill toggle -->
+          <div class="split-pills">
+            <div class="split-pill active">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>
+              $962.92 <span class="count-badge">6</span>
+            </div>
+            <div class="split-pill">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              $847.02 <span class="count-badge">6</span>
+            </div>
+          </div>
+
+          <div class="pnl-row">
+            <span class="pnl-icon"><svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></span>
+            <span class="label">PnL</span>
+            <span class="sep">24H</span>
+            <span class="pos">+10.63%</span>
+            <span class="sep">·</span>
+            <span class="sep">7D</span>
+            <span class="neg">-8.39%</span>
+            <span class="chev-right">›</span>
+          </div>
+
+          <div class="token-list">
+            <!-- SOL — looks normal in current app, no hint of VA -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon sol">◎</div>
+                <div class="token-info">
+                  <div class="token-name">Solana</div>
+                  <div class="token-meta">$94.47 <span class="neg-pct">-0.46%</span></div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$284.93</div>
+                  <div class="token-units">3.016 SOL</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNOS — current app only shows wallet portion, 135k locked invisible -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon unos">?</div>
+                <div class="token-info">
+                  <div class="token-name">United Nations Oil Supply</div>
+                  <div class="token-meta">$0.00224 <span class="neg-pct">-45.42%</span></div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$234.01</div>
+                  <div class="token-units">104,681.45 UNOS</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- WEN — accumulated via DCA, full balance visible (DCA accumulates into wallet) -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon wen">W</div>
+                <div class="token-info">
+                  <div class="token-name">Wen</div>
+                  <div class="token-meta">$0.000523 <span class="pos-pct">+4.1%</span></div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$254.28</div>
+                  <div class="token-units">486,201 WEN</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- JUP — wallet portion only, 400 staked JUP completely hidden -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon jup">J</div>
+                <div class="token-info">
+                  <div class="token-name">Jupiter</div>
+                  <div class="token-meta">$0.447 <span class="neg-pct">-0.8%</span></div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$44.70</div>
+                  <div class="token-units">100 JUP</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- USDC — only shows wallet portion, $420 across DCA/VA/perps invisible -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon usdc">$</div>
+                <div class="token-info">
+                  <div class="token-name">USD Coin</div>
+                  <div class="token-meta">$1.0000 <span style="color:var(--text-3);">0.0%</span></div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$145.00</div>
+                  <div class="token-units">145 USDC</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CURRENT: SKR has completely vanished from wallet view (all 800 locked in trigger) -->
+          <div class="section-header" style="opacity:0.55;font-style:italic;text-transform:none;letter-spacing:0;font-weight:400;font-size:11px;margin-top:16px;line-height:1.45;">
+            <strong style="color:var(--red);font-weight:600;">SKR is missing entirely</strong> — all 800 locked in trigger.<br>
+            UNOS shows 104k but you bought 240k.<br>
+            $420 of USDC is locked across products.<br>
+            400 JUP is staked but invisible here.<br>
+            All hidden behind the second pill or other tabs.
+          </div>
+
+          <div style="height: 100px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== PROPOSED ===================== -->
+    <div class="phone-column">
+      <div class="phone-label proposed">Proposed</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar">
+            <span>7:52</span>
+            <div class="status-icons">
+              <span>•••</span>
+            </div>
+          </div>
+
+          <div class="top-bar">
+            <div class="eye-btn">
+              <svg class="ic" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="tab-pill">
+              <button class="active">Wallet</button>
+              <button>Spend</button>
+            </div>
+            <div class="icon-row">
+              <div class="icon-btn"><svg class="ic-sm" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div>
+              <div class="icon-btn"><svg class="ic-sm" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+            </div>
+          </div>
+
+          <div class="hero">
+            <div class="hero-content">
+              <div class="username">george</div>
+              <div class="balance">$1,809.94</div>
+            </div>
+          </div>
+
+          <div class="watch-banner">
+            <div class="info-dot">i</div>
+            <div>This is a watch-only wallet.</div>
+          </div>
+
+          <!-- PROPOSED: keep the existing two-pill toggle (no change) -->
+          <div class="split-pills">
+            <div class="split-pill active">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>
+              $962.92 <span class="count-badge">6</span>
+            </div>
+            <div class="split-pill">
+              <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              $847.02 <span class="count-badge">6</span>
+            </div>
+          </div>
+
+          <div class="pnl-row">
+            <span class="pnl-icon"><svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></span>
+            <span class="label">PnL</span>
+            <span class="sep">24H</span>
+            <span class="pos">+10.63%</span>
+            <span class="sep">·</span>
+            <span class="sep">7D</span>
+            <span class="neg">-8.39%</span>
+            <span class="chev-right">›</span>
+          </div>
+
+          <div class="section-header" style="margin-top:20px;">
+            Holdings <span class="count">6</span>
+          </div>
+
+          <!-- Hint about interactivity -->
+          <div class="interactive-hint">
+            <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M9 11l3 3 3-3m-3-7v10"/><circle cx="12" cy="12" r="10"/></svg>
+            <span>Tap any chip or locked row to jump to the related order or stake.</span>
+          </div>
+
+          <div class="token-list" style="margin-top:8px;">
+
+            <!-- SOL — VA accumulates into wallet, no locked portion -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon sol">◎</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">Solana</span>
+                    <span class="order-chip linked" style="background:rgba(178,140,255,0.15);color:#b28cff;" data-target="#order-va-sol">VA active</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$94.47</span>
+                    <span class="meta-sep">·</span>
+                    <span class="neg-pct">-0.46%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$284.93</div>
+                  <div class="token-units">3.016 SOL</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UNOS — 240,142 total, 104,681 wallet + 135,461 locked -->
+            <div class="token-card" data-collapsible="true">
+              <div class="token-row">
+                <div class="token-icon unos">?</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">United Nations Oil Supply</span>
+                    <span class="order-chip linked" data-target="#order-limit-unos">1 order</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$0.00224</span>
+                    <span class="meta-sep">·</span>
+                    <span class="neg-pct">-45.42%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$459.94</div>
+                  <div class="token-units">240,142.45 UNOS</div>
+                </div>
+                <button class="expand-btn" data-toggle-expand aria-label="Expand">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="token-breakdown">
+                <div class="breakdown-row">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h6"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Available in wallet</div>
+                    <div class="bd-detail"><span class="bd-units">104,681 UNOS</span> · $234.01</div>
+                  </div>
+                </div>
+                <div class="breakdown-row locked linked" data-target="#order-limit-unos">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Reserved for limit sell</div>
+                    <div class="bd-detail"><span class="bd-units">135,461 UNOS</span> · $225.93</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- WEN — 486,201 total. All in wallet (DCA accumulates) -->
+            <div class="token-card">
+              <div class="token-row">
+                <div class="token-icon wen">W</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">Wen</span>
+                    <span class="order-chip linked" data-target="#order-dca-wen">DCA active</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$0.000523</span>
+                    <span class="meta-sep">·</span>
+                    <span class="pos-pct">+4.1%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$254.28</div>
+                  <div class="token-units">486,201 WEN</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SKR — 800 total, ALL locked in trigger -->
+            <div class="token-card" data-collapsible="true">
+              <div class="token-row">
+                <div class="token-icon skr">S</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">Seeker</span>
+                    <span class="order-chip linked" data-target="#order-trigger-skr">1 order</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$0.0164</span>
+                    <span class="meta-sep">·</span>
+                    <span class="pos-pct">+1.2%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$13.12</div>
+                  <div class="token-units">800 SKR</div>
+                </div>
+                <button class="expand-btn" data-toggle-expand aria-label="Expand">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="token-breakdown">
+                <div class="breakdown-row locked linked" data-target="#order-trigger-skr">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Reserved for trigger sell</div>
+                    <div class="bd-detail"><span class="bd-units">800 SKR</span> · $13.12 (entire balance)</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- JUP — 100 wallet + 400 staked -->
+            <div class="token-card" data-collapsible="true">
+              <div class="token-row">
+                <div class="token-icon jup">J</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">Jupiter</span>
+                    <span class="order-chip linked" style="background:rgba(255,165,250,0.13);color:#ff9bf0;" data-target="#stake-jup">staked</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$0.447</span>
+                    <span class="meta-sep">·</span>
+                    <span class="neg-pct">-0.8%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$223.50</div>
+                  <div class="token-units">500 JUP</div>
+                </div>
+                <button class="expand-btn" data-toggle-expand aria-label="Expand">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="token-breakdown">
+                <div class="breakdown-row">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h6"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Available in wallet</div>
+                    <div class="bd-detail"><span class="bd-units">100 JUP</span> · $44.70</div>
+                  </div>
+                </div>
+                <div class="breakdown-row staked linked" data-target="#stake-jup">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Staked · 9.2% APR</div>
+                    <div class="bd-detail"><span class="bd-units">400 JUP</span> · $178.80</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- USDC — wallet + 3 locked across DCA, VA, Perps -->
+            <div class="token-card" data-collapsible="true">
+              <div class="token-row">
+                <div class="token-icon usdc">$</div>
+                <div class="token-info">
+                  <div class="token-headline">
+                    <span class="token-name">USD Coin</span>
+                    <span class="order-chip linked" data-target="#order-dca-wen">3 active</span>
+                  </div>
+                  <div class="token-meta">
+                    <span>$1.0000</span>
+                    <span class="meta-sep">·</span>
+                    <span style="color:var(--text-3);">0.0%</span>
+                  </div>
+                </div>
+                <div class="token-value-block">
+                  <div class="token-value">$565.00</div>
+                  <div class="token-units">565 USDC</div>
+                </div>
+                <button class="expand-btn" data-toggle-expand aria-label="Expand">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+              <div class="token-breakdown">
+                <div class="breakdown-row">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h6"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Available in wallet</div>
+                    <div class="bd-detail"><span class="bd-units">145 USDC</span> · $145.00</div>
+                  </div>
+                </div>
+                <div class="breakdown-row dca-res linked" data-target="#order-dca-wen">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Reserved for DCA budget</div>
+                    <div class="bd-detail"><span class="bd-units">360 USDC</span> · 18 buys remaining</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+                <div class="breakdown-row va-res linked" data-target="#order-va-sol">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Reserved for VA buys</div>
+                    <div class="bd-detail"><span class="bd-units">35 USDC</span> · 9 cycles remaining</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+                <div class="breakdown-row perps-res linked" data-target="#order-perps-bonk">
+                  <div class="bd-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>
+                  </div>
+                  <div class="bd-content">
+                    <div class="bd-label">Perps collateral</div>
+                    <div class="bd-detail"><span class="bd-units">25 USDC</span> · BONK 5× long</div>
+                  </div>
+                  <span class="bd-arrow">›</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Open Orders section — COLLAPSED by default. Only the button toggles. -->
+          <div class="section-header collapsible collapsed">
+            <span>Open Orders</span>
+            <span class="count">5</span>
+            <button class="expand-btn" data-section-toggle="open-orders" aria-label="Expand">
+              <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+
+          <div class="section-body collapsed" data-section-body="open-orders">
+
+          <!-- 1. LIMIT ORDER (existing — UNOS → wSOL) -->
+          <div class="open-orders-card" id="order-limit-unos">
+            <div class="order-card-row">
+              <div class="order-card-top">
+                <span class="order-side-badge">Limit · Sell</span>
+                <div class="order-pair-display">
+                  UNOS <span class="arrow">→</span> wSOL
+                </div>
+                <span class="order-time">8d</span>
+              </div>
+              <div class="order-detail-grid">
+                <div class="detail-cell">
+                  <div class="label">Selling</div>
+                  <div class="value">135,461 UNOS</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">For (est.)</div>
+                  <div class="value">$225.93</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Limit Price</div>
+                  <div class="value">$0.00280</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Current Price</div>
+                  <div class="value">$0.00224 <span class="neg-pct" style="font-size:11px;">-20%</span></div>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-row">
+                    <span>Filled</span>
+                    <span>0%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. DCA — USDC → WEN -->
+          <div class="open-orders-card" id="order-dca-wen">
+            <div class="order-card-row">
+              <div class="order-card-top">
+                <span class="order-side-badge dca">DCA · Buy</span>
+                <div class="order-pair-display">
+                  USDC <span class="arrow">→</span> WEN
+                </div>
+                <span class="order-time">12d</span>
+              </div>
+              <div class="order-detail-grid">
+                <div class="detail-cell">
+                  <div class="label">Schedule</div>
+                  <div class="value">$20 / day</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Next buy</div>
+                  <div class="value">in 4h 22m</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Acquired</div>
+                  <div class="value">486,201 WEN</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Avg. price</div>
+                  <div class="value">$0.000493</div>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-row">
+                    <span>12 / 30 buys · $240 of $600</span>
+                    <span>40%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill dca" style="width:40%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. VA — USDC → SOL -->
+          <div class="open-orders-card" id="order-va-sol">
+            <div class="order-card-row">
+              <div class="order-card-top">
+                <span class="order-side-badge va">VA · Buy</span>
+                <div class="order-pair-display">
+                  USDC <span class="arrow">→</span> SOL
+                </div>
+                <span class="order-time">3w</span>
+              </div>
+              <div class="order-detail-grid">
+                <div class="detail-cell">
+                  <div class="label">Target growth</div>
+                  <div class="value">+$100 / wk</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Next adjust</div>
+                  <div class="value">in 2d</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Position value</div>
+                  <div class="value">$284.18</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Target value</div>
+                  <div class="value">$300.00 <span class="neg-pct" style="font-size:11px;">-5%</span></div>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-row">
+                    <span>3 / 12 cycles · 3.008 SOL acquired</span>
+                    <span>25%</span>
+                  </div>
+                  <div class="progress-bar"><div class="progress-fill va" style="width:25%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. TRIGGER — SKR take-profit -->
+          <div class="open-orders-card" id="order-trigger-skr">
+            <div class="order-card-row">
+              <div class="order-card-top">
+                <span class="order-side-badge trigger-tp">Trigger · TP</span>
+                <div class="order-pair-display">
+                  SKR <span class="arrow">→</span> USDC
+                </div>
+                <span class="order-time">5d</span>
+              </div>
+              <div class="order-detail-grid">
+                <div class="detail-cell">
+                  <div class="label">Selling</div>
+                  <div class="value">800 SKR</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">For (est.)</div>
+                  <div class="value">$20.00</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Trigger ≥</div>
+                  <div class="value">$0.0250</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Current Price</div>
+                  <div class="value">$0.0164 <span class="pos-pct" style="font-size:11px;">+1.2%</span></div>
+                </div>
+                <div class="trigger-strip">
+                  <span class="left">
+                    <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M7 17l5-5 4 4 5-7"/><path d="M14 9h7v7"/></svg>
+                    Needs <strong style="color:var(--text);">+52.4%</strong> from current
+                  </span>
+                  <span class="distance-pill">Far from trigger</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. PERPS — BONK 5x long (meme token) -->
+          <div class="open-orders-card" id="order-perps-bonk">
+            <div class="order-card-row">
+              <div class="order-card-top">
+                <span class="order-side-badge perps-long">Perps · Long</span>
+                <div class="order-pair-display">
+                  BONK
+                  <span class="leverage-pill" style="margin-left:6px;">5×</span>
+                </div>
+                <span class="order-time">2d</span>
+              </div>
+              <div class="order-detail-grid">
+                <div class="detail-cell">
+                  <div class="label">Collateral</div>
+                  <div class="value">$25.00 USDC</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Position Size</div>
+                  <div class="value">$125.00</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Entry Price</div>
+                  <div class="value">$0.0000218</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Mark Price</div>
+                  <div class="value">$0.0000234 <span class="pos-pct" style="font-size:11px;">+7.3%</span></div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Liq. Price</div>
+                  <div class="value" style="color:var(--red);">$0.0000180</div>
+                </div>
+                <div class="detail-cell">
+                  <div class="label">Unrealized P&amp;L</div>
+                  <div class="value pnl-positive">+$9.17</div>
+                </div>
+                <div class="trigger-strip">
+                  <span class="left">
+                    <svg class="ic-sm" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 9v4M12 17h.01M3 17h18L12 3 3 17z"/></svg>
+                    Liquidation <strong style="color:var(--text);">-23.1%</strong> from mark
+                  </span>
+                  <span class="distance-pill">Healthy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- close section-body for open-orders -->
+          </div>
+
+          <!-- ============ STAKING SECTION (collapsed by default) ============ -->
+          <div class="section-header collapsible collapsed">
+            <span>Staking</span>
+            <span class="count">1</span>
+            <button class="expand-btn" data-section-toggle="staking" aria-label="Expand">
+              <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+
+          <div class="section-body collapsed" data-section-body="staking">
+            <div class="open-orders-card" id="stake-jup">
+              <div class="order-card-row">
+                <div class="order-card-top">
+                  <span class="order-side-badge stake">Stake</span>
+                  <div class="order-pair-display">
+                    JUP
+                    <span class="leverage-pill" style="margin-left:6px;background:rgba(255,165,250,0.13);color:#ff9bf0;">ASR</span>
+                  </div>
+                  <span class="order-time">42d</span>
+                </div>
+                <div class="order-detail-grid">
+                  <div class="detail-cell">
+                    <div class="label">Staked</div>
+                    <div class="value">400 JUP</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="label">Value</div>
+                    <div class="value">$178.80</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="label">APR</div>
+                    <div class="value pnl-positive">9.2%</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="label">Claimable</div>
+                    <div class="value">2.84 JUP <span style="color:var(--text-3);font-size:11px;">($1.27)</span></div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="label">Unstake cooldown</div>
+                    <div class="value">30 days</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="label">Voting power</div>
+                    <div class="value">400.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: 100px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="annotations-title">— Key Changes —</div>
+    <div class="annotations-grid">
+      <div class="annotation">
+        <div class="num">1</div>
+        <div class="head">Unify UNOS into one position</div>
+        <div class="body">Token row shows <strong>total 240,142 UNOS</strong> with a one-line breakdown: 104,681 available · 135,461 locked. No more "where did my tokens go" — every UNOS is accounted for in the same place George is already looking.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">2</div>
+        <div class="head">Flag tokens with active orders</div>
+        <div class="body">A small <span class="order-chip" style="vertical-align:middle">1 order</span> chip on the token name makes it scannable at a glance which holdings have funds tied up off-wallet — without forcing the user into the second pill view to find out.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">3</div>
+        <div class="head">Rename "Jupiter" → "Open Orders"</div>
+        <div class="body">A section titled <strong>"Jupiter"</strong> inside the Jupiter app is recursive and meaningless to anyone who doesn't already know it refers to the protocol's order vault. Functional names beat brand names.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">4</div>
+        <div class="head">One card, five order-aware templates</div>
+        <div class="body">Same component, content adapts per type. <strong>Limit</strong> → target vs. current + fill. <strong>DCA</strong> → schedule + next buy + acquired + avg cost. <strong>VA</strong> → target value vs. position value + deviation. <strong>Trigger</strong> → distance-to-trigger. <strong>Perps</strong> → entry/mark/liq + unrealized P&amp;L + liquidation distance. Color-coded badges per type so the eye sorts them instantly.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">5</div>
+        <div class="head">Staking joins the same model</div>
+        <div class="body">Staked JUP appears two places — as a <strong>breakdown row</strong> inside the JUP holding (with a pink-dot indicator that distinguishes "staked" from "locked in order"), and as its own card in a <strong>Staking section</strong> with APR, claimable rewards, cooldown, and voting power. Same component family, no new mental model.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">6</div>
+        <div class="head">Reconcile the top-line total optically</div>
+        <div class="body">The disconnect between the top balance and the visible token list is what confused George. Every dollar now traces to a visible source — wallet balance, locked-in-order, accumulating-from-DCA, staked, or perps collateral. Nothing hidden behind unlabeled icons.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">7</div>
+        <div class="head">Scales without new patterns</div>
+        <div class="body">The same three primitives — <strong>holding row, breakdown sub-row, product card</strong> — handle Limit, DCA, VA, Trigger, Perps, and Staking. Future products (JupSOL liquid staking, Perps TP/SL, future lending) drop into the same scaffold. Lending and borrowing were considered but excluded here to keep the demo focused.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">8</div>
+        <div class="head">USDC becomes a first-class holding</div>
+        <div class="body">DCA, VA, and Perps all draw collateral or budget from USDC. In the current app, that USDC simply disappears once committed. In the proposed view, USDC is its own row showing exactly where each dollar is reserved — <strong>$145 wallet · $360 DCA · $35 VA · $25 perps</strong>. The "$25 collateral with no USDC holding" math problem goes away.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">9</div>
+        <div class="head">Holdings are collapsible</div>
+        <div class="body">Each token row with a breakdown can be collapsed via the chevron — the screen stays clean for users who don't need the detail, and expandable for users who do. Default is expanded so the design value is immediately visible.</div>
+      </div>
+      <div class="annotation">
+        <div class="num">10</div>
+        <div class="head">Tap-to-jump linking</div>
+        <div class="body">Every <strong>chip and locked-row</strong> in Holdings is a deep link to the related product card. Tap "1 order" on UNOS → scrolls to and pulses the limit order. Tap "DCA budget" inside USDC → scrolls to the DCA card. Holdings answer <em>what</em>; product cards answer <em>why</em>, and one tap bridges them.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ============ Section-level collapse (Open Orders, Staking) ============
+  // Only the chevron button toggles — not the whole header row.
+  document.querySelectorAll('[data-section-toggle]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const sectionName = btn.getAttribute('data-section-toggle');
+      const header = btn.closest('.section-header');
+      const body = document.querySelector(`[data-section-body="${sectionName}"]`);
+      if (header) header.classList.toggle('collapsed');
+      if (body) body.classList.toggle('collapsed');
+    });
+  });
+
+  // ============ Token-card collapse (holdings with breakdowns) ============
+  // Only the dedicated expand button toggles — not the whole row.
+  document.querySelectorAll('[data-toggle-expand]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.token-card');
+      if (card) card.classList.toggle('collapsed');
+    });
+  });
+
+  // Helper: expand the parent section (Open Orders / Staking) if it's collapsed
+  function expandParentSection(targetEl) {
+    const body = targetEl.closest('[data-section-body]');
+    if (!body) return;
+    if (body.classList.contains('collapsed')) {
+      body.classList.remove('collapsed');
+      const sectionName = body.getAttribute('data-section-body');
+      // Find the matching header by looking at the button inside it
+      const btn = document.querySelector(
+        `[data-section-toggle="${sectionName}"]`
+      );
+      if (btn) {
+        const header = btn.closest('.section-header');
+        if (header) header.classList.remove('collapsed');
+      }
+    }
+  }
+
+  // ============ Click-to-scroll (with section expand + pulse) ============
+  document.querySelectorAll('[data-target]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = el.getAttribute('data-target');
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      // First expand the parent section so the target is reachable
+      expandParentSection(target);
+
+      // Wait one frame for the layout to settle, then scroll within the phone screen
+      requestAnimationFrame(() => {
+        const screen = target.closest('.screen');
+        if (!screen) return;
+        const targetRect = target.getBoundingClientRect();
+        const screenRect = screen.getBoundingClientRect();
+        const scrollTo = targetRect.top - screenRect.top + screen.scrollTop - 80;
+        screen.scrollTo({ top: scrollTo, behavior: 'smooth' });
+
+        // Re-trigger pulse animation
+        target.classList.remove('pulse-highlight');
+        void target.offsetWidth;
+        target.classList.add('pulse-highlight');
+        setTimeout(() => target.classList.remove('pulse-highlight'), 1700);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
